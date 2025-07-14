@@ -28,6 +28,7 @@
       border-radius: 8px;
       border: 1px solid #eee;
       text-align: left;
+      max-width: 500px;
     }
 
     .category {
@@ -45,17 +46,54 @@
   <button onclick="generatePhrase()">🎰 Randomize!</button>
 
   <div class="output" id="result">
-    <!-- Your result will appear here -->
+    <!-- Result appears here -->
   </div>
 
   <script>
-    const traveling = ["Step Touch", "Chassé", "Grapevine", "Slide", "Arabesque"];
+    const traveling = [
+      "Choo Choo (not shimmy)",
+      "Samiha",
+      "Campfire",
+      "Pivot-Shift Step",
+      "Step-Touch",
+      "Twist Step",
+      "Sneaky Slide",
+      "Cascading Locks",
+      "Reverse Cascading Locks",
+      "Mardi Scuff",
+      "2-Step Undulation",
+      "4-Step Undulation",
+      "4-Step Undulation with a Twist",
+      "Walking Lazy 8",
+      "Over the Corkscrew",
+      "La Rouge Combo",
+      "Sneaky Slide Pop",
+      "Katerina Hip Circle",
+      "8-4-2-1",
+      "5-Count with Arms and Hips",
+      "Maya Backwalk",
+      "Stomp Step",
+      "Suzie Q",
+      "Figure 8 Backwalk",
+      "Jamila Hip Circle",
+      "X Step",
+      "Single Single 3/4",
+      "Choo Choo Variations",
+      "Syncopated Pivot Shift Step"
+    ];
+
     const isolations = ["Chest Circle", "Hip Lift", "Rib Slide", "Head Roll", "Belly Pop"];
     const turns = ["Pivot Turn", "Spin", "Three-Step Turn", "Barrel Turn", "Spot Turn"];
     const armwork = ["Snake Arms", "Arm Sweep", "Framing", "Cactus Arms", "Wrist Circles"];
     const punctuation = ["Hip Drop", "Shimmy", "Pose", "Stillness", "Freeze"];
     const emotion = ["Joyful", "Mysterious", "Fierce", "Playful", "Sultry"];
-    const layers = ["Shimmy + Turn", "Hip Figure 8 + Arms", "Layered Chest + Travel", "Isos + Traveling Step", "Layered Undulation"];
+    const layers = [
+      "Shimmy + Turn",
+      "Hip Figure 8 + Arms",
+      "Layered Chest + Travel",
+      "Isos + Traveling Step",
+      "Layered Undulation"
+    ];
 
     function getRandomItem(arr) {
       return arr[Math.floor(Math.random() * arr.length)];
