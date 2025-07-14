@@ -39,6 +39,14 @@
     .word {
       color: #aa2e5c;
     }
+
+    .sub {
+      font-style: italic;
+      font-size: 90%;
+      color: #666;
+      display: block;
+      margin-left: 20px;
+    }
   </style>
 </head>
 <body>
@@ -57,9 +65,7 @@
     const armwork = [ "Spades Showgirl Arms", "Flow Arms 1", "Flow Arms 2", "Flow Arms 3", "Windows", "Thread the Needle", "Snake Arms Zoe Style", "Diamonds Arm Series", "Reverse Finger Wave", "Finger Wave", "Reverse Hand Wave", "Hand Wave", "Cobra Arms" ];
 
     const punctuation = [ "Short Pause", "Long Pause", "Extra Long Pause" ];
-
     const emotion = [ "Gesture (stylized pantomime)", "Connect (look at someone)", "Breath", "Close Eyes" ];
-
     const layers = [ "Facing", "Levels", "Tempo", "Timing", "Dynamics (explosive, soft, etc)" ];
 
     function getRandomItem(arr) {
@@ -79,26 +85,35 @@
     }
 
     function generatePhrase() {
-      const itemsToShuffle = [
+      const baseMoves = [
         { category: "Traveling", word: getRandomItem(traveling) },
         { category: "Turns", word: getRandomItem(turns) },
         { category: "Armwork", word: getRandomItem(armwork) },
         ...getTwoDistinctItems(isolations).map(word => ({ category: "Isolations", word }))
       ];
 
-      const shuffledCore = shuffleArray(itemsToShuffle);
+      const extras = [
+        { label: "Punctuation", value: getRandomItem(punctuation) },
+        { label: "Emotion", value: getRandomItem(emotion) },
+        { label: "Layers", value: getRandomItem(layers) }
+      ];
 
-      const punctuationItem = getRandomItem(punctuation);
-      const emotionItem = getRandomItem(emotion);
-      const layersItem = getRandomItem(layers);
+      // Randomly assign 3 extras to 3 of the 5 baseMoves
+      const shuffledBase = shuffleArray(baseMoves);
+      const assignedMoves = shuffledBase.map((item, index) => {
+        const extra = index < extras.length ? extras[index] : null;
+        return { ...item, extra };
+      });
 
-      const resultHTML = shuffledCore.map(
-        item => `<div><span class="category">${item.category}:</span> <span class="word">${item.word}</span></div>`
-      ).join('') + `
-        <div><span class="category">Punctuation:</span> <span class="word">${punctuationItem}</span></div>
-        <div><span class="category">Emotion:</span> <span class="word">${emotionItem}</span></div>
-        <div><span class="category">Layers:</span> <span class="word">${layersItem}</span></div>
-      `;
+      // Shuffle again for varied display order
+      const finalDisplay = shuffleArray(assignedMoves);
+
+      const resultHTML = finalDisplay.map(item => {
+        return `<div>
+          <span class="category">${item.category}:</span> <span class="word">${item.word}</span>
+          ${item.extra ? `<span class="sub">${item.extra.label}: ${item.extra.value}</span>` : ""}
+        </div>`;
+      }).join('');
 
       document.getElementById("result").innerHTML = resultHTML;
     }
