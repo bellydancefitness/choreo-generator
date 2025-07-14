@@ -28,7 +28,7 @@
       border-radius: 8px;
       border: 1px solid #eee;
       text-align: left;
-      max-width: 500px;
+      max-width: 600px;
     }
 
     .category {
@@ -45,65 +45,59 @@
   <h1>Choreo Phrase Generator</h1>
   <button onclick="generatePhrase()">🎰 Randomize!</button>
 
-  <div class="output" id="result">
-    <!-- Result appears here -->
-  </div>
+  <div class="output" id="result"></div>
 
   <script>
-    const traveling = [
-      "Choo Choo (not shimmy)", "Samiha", "Campfire", "Pivot-Shift Step", "Step-Touch", "Twist Step",
-      "Sneaky Slide", "Cascading Locks", "Reverse Cascading Locks", "Mardi Scuff", "2-Step Undulation",
-      "4-Step Undulation", "4-Step Undulation with a Twist", "Walking Lazy 8", "Over the Corkscrew",
-      "La Rouge Combo", "Sneaky Slide Pop", "Katerina Hip Circle", "8-4-2-1",
-      "5-Count with Arms and Hips", "Maya Backwalk", "Stomp Step", "Suzie Q", "Figure 8 Backwalk",
-      "Jamila Hip Circle", "X Step", "Single Single 3/4", "Choo Choo Variations", "Syncopated Pivot Shift Step"
-    ];
+    const traveling = [ "Choo Choo (not shimmy)", "Samiha", "Campfire", "Pivot-Shift Step", "Step-Touch", "Twist Step", "Sneaky Slide", "Cascading Locks", "Reverse Cascading Locks", "Mardi Scuff", "2-Step Undulation", "4-Step Undulation", "4-Step Undulation with a Twist", "Walking Lazy 8", "Over the Corkscrew", "La Rouge Combo", "Sneaky Slide Pop", "Katerina Hip Circle", "8-4-2-1", "5-Count with Arms and Hips", "Maya Backwalk", "Stomp Step", "Suzie Q", "Figure 8 Backwalk", "Jamila Hip Circle", "X Step", "Single Single 3/4", "Choo Choo Variations", "Syncopated Pivot Shift Step" ];
 
-    const isolations = [
-      "Drama Queen", "Spin Out", "Chasing Diamonds", "Knockout", "Mira", "Sadie", "Flow Arms Combo",
-      "Kami Float", "Bike Spokes", "Cobra Arms with Horizontal Lift", "Step Forward Back Forward",
-      "Indigo Kitty Push", "Cobra Combo", "Double Horseshoe", "Slidewinder", "Reverse Mardi Roll",
-      "Mardi Roll", "Corkscrew", "Reverse Corkscrew", "Heel Toe Toe", "1 and 6", "Sit Toe Toe",
-      "Lift-Drop", "Slide", "Circle", "Diamond", "Square", "Twist", "Horseshoe", "Reverse Horseshoe"
-    ];
+    const isolations = [ "Drama Queen", "Spin Out", "Chasing Diamonds", "Knockout", "Mira", "Sadie", "Flow Arms Combo", "Kami Float", "Bike Spokes", "Cobra Arms with Horizontal Lift", "Step Forward Back Forward", "Indigo Kitty Push", "Cobra Combo", "Double Horseshoe", "Slidewinder", "Reverse Mardi Roll", "Mardi Roll", "Corkscrew", "Reverse Corkscrew", "Heel Toe Toe", "1 and 6", "Sit Toe Toe", "Lift-Drop", "Slide", "Circle", "Diamond", "Square", "Twist", "Horseshoe", "Reverse Horseshoe" ];
 
-    const turns = [
-      "Push Turn with Palms", "Zafira Turn", "Pivot Turn", "Pivot Turn with Level Change",
-      "Reda Combo", "Topsy Turvy", "Hook Turn Combo", "Lazy 8 Dip Turn", "3 Step Turn",
-      "Propeller Turn", "Hook Turn", "4 Part Spin", "Ebb and Flow", "Jill Spin"
-    ];
+    const turns = [ "Push Turn with Palms", "Zafira Turn", "Pivot Turn", "Pivot Turn with Level Change", "Reda Combo", "Topsy Turvy", "Hook Turn Combo", "Lazy 8 Dip Turn", "3 Step Turn", "Propeller Turn", "Hook Turn", "4 Part Spin", "Ebb and Flow", "Jill Spin" ];
 
-    const armwork = [
-      "Spades Showgirl Arms", "Flow Arms 1", "Flow Arms 2", "Flow Arms 3", "Windows",
-      "Thread the Needle", "Snake Arms Zoe Style", "Diamonds Arm Series", "Reverse Finger Wave",
-      "Finger Wave", "Reverse Hand Wave", "Hand Wave", "Cobra Arms"
-    ];
+    const armwork = [ "Spades Showgirl Arms", "Flow Arms 1", "Flow Arms 2", "Flow Arms 3", "Windows", "Thread the Needle", "Snake Arms Zoe Style", "Diamonds Arm Series", "Reverse Finger Wave", "Finger Wave", "Reverse Hand Wave", "Hand Wave", "Cobra Arms" ];
 
-    const punctuation = [
-      "Short Pause", "Long Pause", "Extra Long Pause"
-    ];
+    const punctuation = [ "Short Pause", "Long Pause", "Extra Long Pause" ];
 
-    const emotion = [
-      "Gesture (stylized pantomime)", "Connect (look at someone)", "Breath", "Close Eyes"
-    ];
+    const emotion = [ "Gesture (stylized pantomime)", "Connect (look at someone)", "Breath", "Close Eyes" ];
 
-    const layers = [
-      "Facing", "Levels", "Tempo", "Timing", "Dynamics (explosive, soft, etc)"
-    ];
+    const layers = [ "Facing", "Levels", "Tempo", "Timing", "Dynamics (explosive, soft, etc)" ];
 
     function getRandomItem(arr) {
       return arr[Math.floor(Math.random() * arr.length)];
     }
 
+    function getTwoDistinctItems(arr) {
+      const shuffled = [...arr].sort(() => 0.5 - Math.random());
+      return [shuffled[0], shuffled[1]];
+    }
+
+    function shuffleArray(arr) {
+      return arr
+        .map(value => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value);
+    }
+
     function generatePhrase() {
-      const resultHTML = `
-        <div><span class="category">Traveling:</span> <span class="word">${getRandomItem(traveling)}</span></div>
-        <div><span class="category">Isolations:</span> <span class="word">${getRandomItem(isolations)}</span></div>
-        <div><span class="category">Turns:</span> <span class="word">${getRandomItem(turns)}</span></div>
-        <div><span class="category">Armwork:</span> <span class="word">${getRandomItem(armwork)}</span></div>
-        <div><span class="category">Punctuation:</span> <span class="word">${getRandomItem(punctuation)}</span></div>
-        <div><span class="category">Emotion:</span> <span class="word">${getRandomItem(emotion)}</span></div>
-        <div><span class="category">Layers:</span> <span class="word">${getRandomItem(layers)}</span></div>
+      const itemsToShuffle = [
+        { category: "Traveling", word: getRandomItem(traveling) },
+        { category: "Turns", word: getRandomItem(turns) },
+        { category: "Armwork", word: getRandomItem(armwork) },
+        ...getTwoDistinctItems(isolations).map(word => ({ category: "Isolations", word }))
+      ];
+
+      const shuffledCore = shuffleArray(itemsToShuffle);
+
+      const punctuationItem = getRandomItem(punctuation);
+      const emotionItem = getRandomItem(emotion);
+      const layersItem = getRandomItem(layers);
+
+      const resultHTML = shuffledCore.map(
+        item => `<div><span class="category">${item.category}:</span> <span class="word">${item.word}</span></div>`
+      ).join('') + `
+        <div><span class="category">Punctuation:</span> <span class="word">${punctuationItem}</span></div>
+        <div><span class="category">Emotion:</span> <span class="word">${emotionItem}</span></div>
+        <div><span class="category">Layers:</span> <span class="word">${layersItem}</span></div>
       `;
 
       document.getElementById("result").innerHTML = resultHTML;
