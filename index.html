@@ -2,32 +2,77 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Phrase Randomizer</title>
+  <title>Choreo Phrase Generator</title>
   <style>
-    body { font-family: sans-serif; text-align: center; padding: 50px; }
-    button { font-size: 20px; padding: 10px 20px; }
-    .output { margin-top: 30px; font-size: 24px; font-weight: bold; }
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 50px;
+      background-color: #fdf6f0;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 10px 20px;
+      margin-top: 20px;
+    }
+
+    .output {
+      margin-top: 40px;
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 2;
+      background: #fffbe8;
+      display: inline-block;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #eee;
+      text-align: left;
+    }
+
+    .category {
+      font-weight: bold;
+      color: #555;
+    }
+
+    .word {
+      color: #aa2e5c;
+    }
   </style>
 </head>
 <body>
-  <h1>Random Phrase Generator</h1>
+  <h1>Choreo Phrase Generator</h1>
   <button onclick="generatePhrase()">🎰 Randomize!</button>
-  <div class="output" id="result"></div>
+
+  <div class="output" id="result">
+    <!-- Your result will appear here -->
+  </div>
 
   <script>
-    const category1 = ["Fiery", "Gentle", "Electric", "Windy", "Shadow"];
-    const category2 = ["Tiger", "Flower", "Storm", "Phoenix", "Dancer"];
-    const category3 = ["Whispers", "Leaps", "Glows", "Echoes", "Burns"];
-    const category4 = ["In", "Beyond", "Under", "Through", "Across"];
-    const category5 = ["Twilight", "Dreams", "Time", "Silence", "Fire"];
+    const traveling = ["Step Touch", "Chassé", "Grapevine", "Slide", "Arabesque"];
+    const isolations = ["Chest Circle", "Hip Lift", "Rib Slide", "Head Roll", "Belly Pop"];
+    const turns = ["Pivot Turn", "Spin", "Three-Step Turn", "Barrel Turn", "Spot Turn"];
+    const armwork = ["Snake Arms", "Arm Sweep", "Framing", "Cactus Arms", "Wrist Circles"];
+    const punctuation = ["Hip Drop", "Shimmy", "Pose", "Stillness", "Freeze"];
+    const emotion = ["Joyful", "Mysterious", "Fierce", "Playful", "Sultry"];
+    const layers = ["Shimmy + Turn", "Hip Figure 8 + Arms", "Layered Chest + Travel", "Isos + Traveling Step", "Layered Undulation"];
 
     function getRandomItem(arr) {
       return arr[Math.floor(Math.random() * arr.length)];
     }
 
     function generatePhrase() {
-      const phrase = `${getRandomItem(category1)} ${getRandomItem(category2)} ${getRandomItem(category3)} ${getRandomItem(category4)} ${getRandomItem(category5)}`;
-      document.getElementById("result").textContent = phrase;
+      const resultHTML = `
+        <div><span class="category">Traveling:</span> <span class="word">${getRandomItem(traveling)}</span></div>
+        <div><span class="category">Isolations:</span> <span class="word">${getRandomItem(isolations)}</span></div>
+        <div><span class="category">Turns:</span> <span class="word">${getRandomItem(turns)}</span></div>
+        <div><span class="category">Armwork:</span> <span class="word">${getRandomItem(armwork)}</span></div>
+        <div><span class="category">Punctuation:</span> <span class="word">${getRandomItem(punctuation)}</span></div>
+        <div><span class="category">Emotion:</span> <span class="word">${getRandomItem(emotion)}</span></div>
+        <div><span class="category">Layers:</span> <span class="word">${getRandomItem(layers)}</span></div>
+      `;
+
+      document.getElementById("result").innerHTML = resultHTML;
     }
   </script>
 </body>
