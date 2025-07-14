@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Phrase Randomizer</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 50px; }
+    button { font-size: 20px; padding: 10px 20px; }
+    .output { margin-top: 30px; font-size: 24px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Random Phrase Generator</h1>
+  <button onclick="generatePhrase()">🎰 Randomize!</button>
+  <div class="output" id="result"></div>
+
+  <script>
+    const category1 = ["Fiery", "Gentle", "Electric", "Windy", "Shadow"];
+    const category2 = ["Tiger", "Flower", "Storm", "Phoenix", "Dancer"];
+    const category3 = ["Whispers", "Leaps", "Glows", "Echoes", "Burns"];
+    const category4 = ["In", "Beyond", "Under", "Through", "Across"];
+    const category5 = ["Twilight", "Dreams", "Time", "Silence", "Fire"];
+
+    function getRandomItem(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function generatePhrase() {
+      const phrase = `${getRandomItem(category1)} ${getRandomItem(category2)} ${getRandomItem(category3)} ${getRandomItem(category4)} ${getRandomItem(category5)}`;
+      document.getElementById("result").textContent = phrase;
+    }
+  </script>
+</body>
+</html>
